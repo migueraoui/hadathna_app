@@ -33,11 +33,11 @@ class _SahihScreenState extends State<SahihScreen> {
   body: NotificationListener(
     onNotification: (notification) {
       if(notification is ScrollEndNotification){
-        context.read<HadithsCubit>().getHadiths(widget.sahihModel.source,start,end+15);
+        context.read<HadithsCubit>().getHadiths(widget.sahihModel.source,start,end+16);
       }
       return true; 
     },
-    child: SingleChildScrollView(padding: EdgeInsets.symmetric(horizontal: 16.w),child: Center(
+    child: SingleChildScrollView(padding: EdgeInsets.symmetric(horizontal: 20.w),child: Center(
       child: Column(crossAxisAlignment: CrossAxisAlignment.center,children: [
         SizedBox(height: 32.h,),
         ClipRRect(borderRadius: borderRadius,child: Image.asset(widget.sahihModel.cover,width: 120.w,fit: BoxFit.cover,height: 170.h,)),
