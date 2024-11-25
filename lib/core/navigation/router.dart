@@ -6,22 +6,24 @@ import 'package:hadathna_app/features/sahihs/ui/pages/hadith.dart';
 import 'package:hadathna_app/features/sahihs/ui/pages/home.dart';
 import 'package:hadathna_app/features/sahihs/ui/pages/sahih.dart';
 
-class AppRouter{
-  static Route<dynamic>? onGenerateRoute(RouteSettings settings){
-    switch(settings.name){
-      case AppRoutes.home:
-        return MaterialPageRoute(builder: (context) => HomeScreen(),);
+class AppRouter {
+  static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
+    final Map<String, WidgetBuilder> routes = {
+      AppRoutes.home: (context) => HomeScreen(),
+      AppRoutes.sahihPage: (context) {
+        SahihModel sahihModel = settings.arguments as SahihModel;
+        return SahihScreen(sahihModel: sahihModel);
+      },
+      AppRoutes.hadithPage: (context) {
+        Hadith hadith = settings.arguments as Hadith;
+        return HadithScreen(hadith: hadith);
+      },
+    };
 
-    case AppRoutes.sahihPage :
-      SahihModel sahihModel = settings.arguments as SahihModel;
-      return MaterialPageRoute(builder: (context) => SahihScreen(sahihModel: sahihModel,));
-    case AppRoutes.hadithPage:
-          Hadith hadith = settings.arguments as Hadith;
-    return MaterialPageRoute(builder: (context) => HadithScreen(hadith: hadith),);
+    final builder = routes[settings.name];
+    if (builder != null) {
+      return MaterialPageRoute(builder: builder);
     }
-    
-
-    return null;
-  } 
-    
+    return null; 
+  }
 }
